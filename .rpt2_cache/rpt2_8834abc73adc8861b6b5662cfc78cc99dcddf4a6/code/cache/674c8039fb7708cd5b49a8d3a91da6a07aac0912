@@ -1,0 +1,4 @@
+{
+  "code": "export default class StartUI extends Laya.Scene {\r\n    constructor() {\r\n        super();\r\n        StartUI.instance = this;\r\n    }\r\n    onEnable() {\r\n        this.startBtn.on(Laya.Event.CLICK, this, this.onClick);\r\n    }\r\n    onClick(e) {\r\n        Laya.Scene.close(\"StartMenu.scene\");\r\n        Laya.Scene.open(\"mapScene.scene\");\r\n    }\r\n}\r\n",
+  "references": []
+}

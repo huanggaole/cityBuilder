@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"runtime":"script/StartUI.ts"},"compId":2,"child":[{"type":"Button","props":{"y":386,"width":350,"var":"startBtn","skin":"comp/button.png","sizeGrid":"15,15,15,15","pivotY":36,"pivotX":175,"name":"startBtn","labelSize":48,"labelFont":"SimHei","label":"开始游戏","height":72,"centerX":0},"compId":3}],"loadList":["comp/button.png"],"loadList3D":[]}

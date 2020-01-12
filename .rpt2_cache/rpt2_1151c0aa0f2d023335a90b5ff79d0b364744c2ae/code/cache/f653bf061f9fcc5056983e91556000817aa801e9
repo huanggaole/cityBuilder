@@ -1,0 +1,4 @@
+{
+  "code": "export default class GameUI extends Laya.Scene {\r\n    constructor() {\r\n        super();\r\n        this.mX = 0;\r\n        this.mY = 0;\r\n        console.log(\"地图初始化\");\r\n        GameUI.instance = this;\r\n        this.createMap();\r\n    }\r\n    createMap() {\r\n        this.tiledMap = new Laya.TiledMap();\r\n        this.mX = this.mY = 0;\r\n        console.log(\"开始加载地图\");\r\n        this.tiledMap.createMap(\"res/tiledMap/map1.json\", new Laya.Rectangle(0, 0, this.width, this.height), new Laya.Handler(this, this.completeHandler));\r\n    }\r\n    completeHandler() {\r\n        console.log(this.tiledMap);\r\n    }\r\n}\r\n",
+  "references": []
+}
