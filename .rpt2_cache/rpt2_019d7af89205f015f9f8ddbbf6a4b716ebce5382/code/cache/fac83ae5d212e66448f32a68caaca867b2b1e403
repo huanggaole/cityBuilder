@@ -1,0 +1,8 @@
+{
+  "code": "import GameUI from \"./script/GameUI\";\r\nimport StartUI from \"./script/StartUI\";\r\nimport CheckingDialog from \"./script/CheckingDialogUI\";\r\nexport default class GameConfig {\r\n    constructor() { }\r\n    static init() {\r\n        var reg = Laya.ClassUtils.regClass;\r\n        reg(\"script/CheckingDialogUI.ts\", CheckingDialog);\r\n        reg(\"script/StartUI.ts\", StartUI);\r\n        reg(\"script/GameUI.ts\", GameUI);\r\n    }\r\n}\r\nGameConfig.width = 640;\r\nGameConfig.height = 1136;\r\nGameConfig.scaleMode = \"showall\";\r\nGameConfig.screenMode = \"none\";\r\nGameConfig.alignV = \"center\";\r\nGameConfig.alignH = \"center\";\r\nGameConfig.startScene = \"StartMenu.scene\";\r\nGameConfig.sceneRoot = \"\";\r\nGameConfig.debug = false;\r\nGameConfig.stat = false;\r\nGameConfig.physicsDebug = false;\r\nGameConfig.exportSceneToJson = true;\r\nGameConfig.init();\r\n",
+  "references": [
+    "C:/Users/huang/Documents/cityBuilder/src/script/GameUI.ts",
+    "C:/Users/huang/Documents/cityBuilder/src/script/StartUI.ts",
+    "C:/Users/huang/Documents/cityBuilder/src/script/CheckingDialogUI.ts"
+  ]
+}

@@ -35,6 +35,7 @@
         GameState[GameState["CameraOperation"] = 0] = "CameraOperation";
         GameState[GameState["Construction"] = 1] = "Construction";
         GameState[GameState["Checking"] = 2] = "Checking";
+        GameState[GameState["Infomation"] = 3] = "Infomation";
     })(GameState || (GameState = {}));
     class GameUI extends Laya.Scene {
         constructor() {
@@ -51,6 +52,9 @@
         }
         onEnable() {
             this.cameraOper.on(Laya.Event.CLICK, this, this.onCameraOperClick);
+            this.buildOper.on(Laya.Event.CLICK, this, this.onBuildOperClick);
+            this.checkOper.on(Laya.Event.CLICK, this, this.onCheckOperClick);
+            this.infoOper.on(Laya.Event.CLICK, this, this.onInfoOperClick);
         }
         createMap() {
             this.tiledMap = new Map();
@@ -111,7 +115,20 @@
         }
         onCameraOperClick(e) {
             this.gamestate = GameState.CameraOperation;
-            this.infolbl.text = "移动缩放模式：单指操作进行地图移动，双指操作进行地图缩放。";
+            this.infoLbl.text = "移动缩放模式：单指操作进行地图移动，双指操作进行地图缩放。";
+        }
+        onBuildOperClick(e) {
+            this.gamestate = GameState.Construction;
+            this.infoLbl.text = "建设模式：请先点选想要的规划用地，再在地图上选择建设地点。";
+        }
+        onCheckOperClick(e) {
+            this.gamestate = GameState.Checking;
+            this.infoLbl.text = "查询地格模式：点选想要查询的地格。";
+            Laya.Dialog.open("CheckingDialog.scene", true, []);
+        }
+        onInfoOperClick(e) {
+            this.gamestate = GameState.Infomation;
+            this.infoLbl.text = "查询信息模式：点选想要查阅的城市信息。";
         }
     }
 
@@ -129,10 +146,14 @@
         }
     }
 
+    class CheckingDialog extends Laya.Dialog {
+    }
+
     class GameConfig {
         constructor() { }
         static init() {
             var reg = Laya.ClassUtils.regClass;
+            reg("script/CheckingDialogUI.ts", CheckingDialog);
             reg("script/StartUI.ts", StartUI);
             reg("script/GameUI.ts", GameUI);
         }

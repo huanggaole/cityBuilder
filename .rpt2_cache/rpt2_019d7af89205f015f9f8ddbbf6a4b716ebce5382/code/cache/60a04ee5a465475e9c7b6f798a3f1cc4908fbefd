@@ -1,0 +1,4 @@
+{
+  "code": "export default class CheckingDialog extends Laya.Dialog {\r\n}\r\n",
+  "references": []
+}

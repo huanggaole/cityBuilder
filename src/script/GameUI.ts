@@ -1,4 +1,5 @@
 import Map from "../map/Map";
+import CheckingDialog from "./CheckingDialogUI";
 /**
  * 本示例采用非脚本的方式实现，而使用继承页面基类，实现页面逻辑。在IDE里面设置场景的Runtime属性即可和场景进行关联
  * 相比脚本方式，继承式页面类，可以直接使用页面定义的属性（通过IDE内var属性定义），比如this.tipLbll，this.scoreLbl，具有代码提示效果
@@ -9,6 +10,7 @@ enum GameState{
     CameraOperation,
     Construction,
     Checking,
+    Infomation
 }
 
 export default class GameUI extends Laya.Scene {
@@ -27,7 +29,11 @@ export default class GameUI extends Laya.Scene {
    private mY: number = 0;
         
    private cameraOper: Laya.Button;
-   private infolbl: Laya.Label;
+   private buildOper: Laya.Button;
+   private checkOper: Laya.Button;
+   private infoOper: Laya.Button;
+   
+   private infoLbl: Laya.Label;
 
    constructor() {
        super();
@@ -35,11 +41,15 @@ export default class GameUI extends Laya.Scene {
        GameUI.instance = this;
        this.gamestate = GameState.CameraOperation;
        this.createMap();
-
+       
    }
 
    onEnable(): void {
         this.cameraOper.on(Laya.Event.CLICK, this, this.onCameraOperClick);
+        this.buildOper.on(Laya.Event.CLICK, this, this.onBuildOperClick);
+        this.checkOper.on(Laya.Event.CLICK, this, this.onCheckOperClick);
+        this.infoOper.on(Laya.Event.CLICK, this, this.onInfoOperClick);
+        
     }
 
    //创建地图
@@ -122,7 +132,26 @@ export default class GameUI extends Laya.Scene {
 
     onCameraOperClick(e: Laya.Event): void {
         this.gamestate = GameState.CameraOperation;
-        this.infolbl.text = "移动缩放模式：单指操作进行地图移动，双指操作进行地图缩放。";
-        //this.tiledMap.
+        this.infoLbl.text = "移动缩放模式：单指操作进行地图移动，双指操作进行地图缩放。";
+
+    }
+
+    onBuildOperClick(e: Laya.Event): void {
+        this.gamestate = GameState.Construction;
+        this.infoLbl.text = "建设模式：请先点选想要的规划用地，再在地图上选择建设地点。";
+
+    }
+
+    onCheckOperClick(e: Laya.Event): void {
+        this.gamestate = GameState.Checking;
+        this.infoLbl.text = "查询地格模式：点选想要查询的地格。";
+        Laya.Dialog.open("CheckingDialog.scene",true,[]);
+
+    }
+
+    onInfoOperClick(e: Laya.Event): void {
+        this.gamestate = GameState.Infomation;
+        this.infoLbl.text = "查询信息模式：点选想要查阅的城市信息。";
+
     }
 }
